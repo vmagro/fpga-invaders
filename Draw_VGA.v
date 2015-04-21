@@ -58,21 +58,56 @@ module Draw_VGA(
 	//assign vga_b = vga_b_t;
 	
 	reg R_t, B_t;
+	reg [3:0] AlienH;
+	reg [3:0] AlienW;
+	reg isAlien;
+	reg [9:0] CounterX_t;
+	reg [9:0] CounterY_t;
 	
 	assign G = (CounterX >= PlayerCol) && (CounterX < (PlayerCol + PlayerWidth)) && (CounterY >= PlayerRow) && (CounterY < (PlayerRow + PlayerHeight));
 	assign R = R_t;
 	//assign G = G_t;
 	assign B = B_t;
 	
-	integer i,j;
+	//integer i,j;
 	always @(*)
 	begin
 		if (Reset)
 		begin
 			R_t = 0;
 			B_t = 0;
+			AlienH = 0;
+			AlienW = 0;
+			isAlien = 0;
+			CounterX_t = 10'bxxxxxxxxxx;
+			CounterY_t = 10'bxxxxxxxxxx;
 		end
-		for (i=0; i < 5; i = i+1)
+		else
+		begin
+			isAlien = 0;
+			AlienH = 0;
+			AlienW = 0;
+			CounterX_t = CounterX;
+			CounterY_t = CounterY;
+			R_t = 0;
+			if (CounterX_t >= AliensCol && CounterY_t >= AliensRow)
+			begin
+				CounterX_t = CounterX_t - AliensCol;
+				CounterY_t = CounterY_t - AliensRow;
+				CounterX_t = CounterX_t % (AlienWidth + AlienWidthSpacing);
+				AlienH = CounterX_t / (AlienWidth + AlienWidthSpacing);
+				CounterY_t = CounterY_t % (AlienHeight + AlienHeightSpacing);
+				AlienW = CounterY_t / (AlienHeight + AlienHeightSpacing);
+				if (CounterX_t < AlienWidth && CounterY_t < AlienHeight && Aliens_Grid[AlienW * NumCols + AlienH])
+					R_t = 1;
+			end
+		end
+		
+		
+		
+		
+		
+		/*for (i=0; i < 5; i = i+1)
 		begin
 			for (j=0; j < 10; j = j+1)
 			begin
@@ -90,7 +125,7 @@ module Draw_VGA(
 					end
 				end
 			end
-		end
+		end*/
 	end
 	
 /*	always @(posedge Clk)
