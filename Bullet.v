@@ -68,7 +68,10 @@ module Bullet(
 					//is it in the right row to hit an alien?
 					if ((Bullet_Row >= (j * (AlienWidth + AlienWidthSpacing))) && (Bullet_Row <= (j * (AlienWidth + AlienWidthSpacing) + AlienWidth))) begin
 						if ((Bullet_Col >= (i * (AlienHeight + AlienHeightSpacing))) && (Bullet_Col <= (i * (AlienHeight + AlienHeightSpacing)))) begin
-							Aliens_Grid[i * NumCols + j] <= 0;
+							if (Aliens_Grid[i * NumCols + j] == 1) begin
+								Aliens_Grid[i * NumCols + j] <= 0;
+								Bullet_Row <= 500;
+							end
 						end
 					end
 				end
