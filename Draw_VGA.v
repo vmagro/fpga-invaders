@@ -57,7 +57,7 @@ module Draw_VGA(
 	//assign vga_g = vga_g_t;
 	//assign vga_b = vga_b_t;
 	
-	reg R_t, G_t, B_t;
+	reg R_t, B_t;
 	
 	assign G = (CounterX >= PlayerCol) && (CounterX < (PlayerCol + PlayerWidth)) && (CounterY >= PlayerRow) && (CounterY < (PlayerRow + PlayerHeight));
 	assign R = R_t;
