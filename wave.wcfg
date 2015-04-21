@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Brian/USC/EE-254/Final Project/Space_Invaders/Draw_VGA_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="Draw_VGA_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="16" />
+   <wvobject fp_name="/Draw_VGA_tb/R" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">R</obj_property>
+      <obj_property name="ObjectShortName">R</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/G" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">G</obj_property>
+      <obj_property name="ObjectShortName">G</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/B" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">B</obj_property>
+      <obj_property name="ObjectShortName">B</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/Aliens_Grid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">Aliens_Grid[49:0]</obj_property>
+      <obj_property name="ObjectShortName">Aliens_Grid[49:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/AliensRow" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">AliensRow[8:0]</obj_property>
+      <obj_property name="ObjectShortName">AliensRow[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/AliensCol" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">AliensCol[9:0]</obj_property>
+      <obj_property name="ObjectShortName">AliensCol[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/PlayerRow" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PlayerRow[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PlayerRow[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/PlayerCol" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PlayerCol[9:0]</obj_property>
+      <obj_property name="ObjectShortName">PlayerCol[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">Clk</obj_property>
+      <obj_property name="ObjectShortName">Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/Reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">Reset</obj_property>
+      <obj_property name="ObjectShortName">Reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/BulletRow" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">BulletRow[8:0]</obj_property>
+      <obj_property name="ObjectShortName">BulletRow[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/BulletCol" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">BulletCol[9:0]</obj_property>
+      <obj_property name="ObjectShortName">BulletCol[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/BulletExists" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">BulletExists</obj_property>
+      <obj_property name="ObjectShortName">BulletExists</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/CounterX" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">CounterX[9:0]</obj_property>
+      <obj_property name="ObjectShortName">CounterX[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/CounterY" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">CounterY[9:0]</obj_property>
+      <obj_property name="ObjectShortName">CounterY[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Draw_VGA_tb/inDisplayArea" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inDisplayArea</obj_property>
+      <obj_property name="ObjectShortName">inDisplayArea</obj_property>
+   </wvobject>
+</wave_config>
