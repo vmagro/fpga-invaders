@@ -5,14 +5,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, Sw0, Sw1, btnU, btnD,
 	St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar,
-	An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
+	//An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
 	LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
 	MISO, SW, SS, MOSI, SCLK, LED, AN, SEG);
 	
 	input ClkPort, Sw0, btnU, btnD, Sw0, Sw1;
 	output St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar;
 	output vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b;
-	output An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp;
+	//output An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp;
 	output LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
 	reg vga_r, vga_g, vga_b;
 	
@@ -20,6 +20,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	
 	/*  LOCAL SIGNALS */
 	wire	reset, start, ClkPort, board_clk, clk, button_clk;
+	wire GameClk;
 	
 	BUF BUF1 (board_clk, ClkPort); 	
 	BUF BUF2 (reset, Sw0);
@@ -68,8 +69,8 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 		vga_r <= R & inDisplayArea;
 		vga_g <= G & inDisplayArea;
 		vga_b <= B & inDisplayArea;
-	end
-	*/
+	end*/
+
 	
 	/////////////////////////////////////////////////////////////////
 	//////////////  	  VGA control ends here 	 ///////////////////
@@ -113,7 +114,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	assign SSD3 = 4'b1111;
 	assign SSD2 = 4'b1111;
 	assign SSD1 = 4'b1111;
-	assign SSD0 = position[3:0];
+	assign SSD0 = joystick_data;
 	
 	// need a scan clk for the seven segment display 
 	// 191Hz (50MHz / 2^18) works well
@@ -159,11 +160,11 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			default: SSD_CATHODES = 7'bXXXXXXX ; // default is not needed as we covered all cases
 		endcase
 	end
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	//////////////  	  SSD control ends here 	 ///////////////////
 	/////////////////////////////////////////////////////////////////
-	*/
+	
 	
 	///
 	///New Stuff
@@ -370,7 +371,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//-----------------------------------------------
 			
 			Player Player_1(
-				 .Clk(clk),
+				 .Clk(DIV_CLK[25]),
 				 .Reset(reset),
 				 .Joystick_data(joystick_data),
 				 .Player_Row(PlayerRow),
@@ -381,7 +382,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//  	  			Bullet Interface
 			//-----------------------------------------------
 
-			Bullet Bullet_1(
+/*			Bullet Bullet_1(
 				 .Clk(clk),
 				 .Reset(reset),
 				 .Bullet_Fired(Bullet_Fired),
@@ -394,6 +395,6 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Aliens_Defeated(Aliens_Defeated),
 				 .Bullet_Onscreen(Bullet_Onscreen),
 				 .Aliens_Grid(Aliens_Grid)
-			);
+			);*/
 	
 endmodule
