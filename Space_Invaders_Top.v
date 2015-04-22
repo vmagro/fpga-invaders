@@ -6,21 +6,21 @@
 module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, Sw0, Sw1, btnU, btnD,
 	St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar,
 	//An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
-	LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
+	//LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
 	MISO, SW, SS, MOSI, SCLK, LED, AN, SEG);
 	
 	input ClkPort, Sw0, btnU, btnD, Sw0, Sw1;
 	output St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar;
 	output vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b;
 	//output An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp;
-	output LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
+	//output LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
 	reg vga_r, vga_g, vga_b;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*  LOCAL SIGNALS */
 	wire	reset, start, ClkPort, board_clk, clk, button_clk;
-	wire GameClk;
+	wire game_clk;
 	
 	BUF BUF1 (board_clk, ClkPort); 	
 	BUF BUF2 (reset, Sw0);
@@ -37,6 +37,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 
 	assign	button_clk = DIV_CLK[18];
 	assign	clk = DIV_CLK[1];
+	assign	game_clk = DIV_CLK[20];
 	assign 	{St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar} = {5'b11111};
 	
 	wire inDisplayArea;
@@ -218,7 +219,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//  	  			PmodJSTK Interface
 			//-----------------------------------------------
 			PmodJSTK PmodJSTK_Int(
-					.CLK(clk),
+					.CLK(board_clk),
 					.RST(reset),
 					.sndRec(sndRec),
 					.DIN(sndData),
@@ -235,7 +236,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//  		Seven Segment Display Controller
 			//-----------------------------------------------
 			ssdCtrl DispCtrl(
-					.CLK(clk),
+					.CLK(board_clk),
 					.RST(reset),
 					.DIN(posData),
 					.AN(AN),
@@ -249,7 +250,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//  			 Send Receive Generator
 			//-----------------------------------------------
 			ClkDiv_5Hz genSndRec(
-					.CLK(clk),
+					.CLK(board_clk),
 					.RST(reset),
 					.CLKOUT(sndRec)
 			);
@@ -359,7 +360,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//-----------------------------------------------
 			
 			Aliens Aliens_1(
-				 .Clk(DIV_CLK[25]),
+				 .Clk(game_clk),
 				 .Reset(reset),
 				 .AliensRow(AliensRow),
 				 .AliensCol(AliensCol),
@@ -371,7 +372,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//-----------------------------------------------
 			
 			Player Player_1(
-				 .Clk(DIV_CLK[25]),
+				 .Clk(game_clk),
 				 .Reset(reset),
 				 .Joystick_data(joystick_data),
 				 .Player_Row(PlayerRow),
@@ -382,7 +383,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//  	  			Bullet Interface
 			//-----------------------------------------------
 
-/*			Bullet Bullet_1(
+			Bullet Bullet_1(
 				 .Clk(clk),
 				 .Reset(reset),
 				 .Bullet_Fired(Bullet_Fired),
@@ -395,6 +396,6 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Aliens_Defeated(Aliens_Defeated),
 				 .Bullet_Onscreen(Bullet_Onscreen),
 				 .Aliens_Grid(Aliens_Grid)
-			);*/
+			);
 	
 endmodule
