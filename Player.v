@@ -37,9 +37,9 @@ module Player(
 		if (Reset)
 		begin
 			Player_Col_t <= 310;
-			Player_Row_t <= 350;
+			Player_Row_t <= 400;
 		end
-		else if (Joystick_data > 6 && Player_Col_t < 635)
+		else if (Joystick_data > 6 && Player_Col_t < 600)
 			Player_Col_t <= Player_Col_t + 5;
 		else if (Joystick_data < 4 && Player_Col_t > 5)
 			Player_Col_t <= Player_Col_t - 5;

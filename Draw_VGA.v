@@ -94,10 +94,10 @@ module Draw_VGA(
 			begin
 				CounterX_t = CounterX_t - AliensCol;
 				CounterY_t = CounterY_t - AliensRow;
-				CounterX_t = CounterX_t % (AlienWidth + AlienWidthSpacing);
 				AlienX = CounterX_t / (AlienWidth + AlienWidthSpacing);
-				CounterY_t = CounterY_t % (AlienHeight + AlienHeightSpacing);
 				AlienY = CounterY_t / (AlienHeight + AlienHeightSpacing);
+				CounterX_t = CounterX_t % (AlienWidth + AlienWidthSpacing);
+				CounterY_t = CounterY_t % (AlienHeight + AlienHeightSpacing);
 				if (CounterX_t < AlienWidth && CounterY_t < AlienHeight && Aliens_Grid[AlienY * NumCols + AlienX] && CounterX < AliensCol + 10 * (AlienWidth + AlienWidthSpacing) && CounterY < AliensRow + 5 * (AlienHeight + AlienHeightSpacing))
 					R_t = 1;
 			end

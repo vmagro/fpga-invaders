@@ -49,7 +49,7 @@ module Aliens(
 			if (MovingRight)
 			begin
 				AliensCol_t <= AliensCol_t + HorizontalMovement;
-				if (AliensCol_t + 390 > 630)
+				if (AliensCol_t + 390 > 625)
 				begin
 					MovingRight <= ~MovingRight;
 					AliensRow_t <= AliensRow_t + VerticalMovement;
