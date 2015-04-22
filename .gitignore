@@ -79,6 +79,7 @@ impact.xsl
 impact_impact.xwbt
 xst/
 
+*.bit
 #ignore OS noise
 
 Thumbs.db
