@@ -384,7 +384,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//-----------------------------------------------
 
 			Bullet Bullet_1(
-				 .Clk(clk),
+				 .Clk(game_clk),
 				 .Reset(reset),
 				 .Bullet_Fired(Bullet_Fired),
 				 .Aliens_Row(Aliens_Row),
