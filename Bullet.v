@@ -35,8 +35,8 @@ module Bullet(
 );
 
 	//assign Aliens_Grid = 50'h3FFFFFFFFFFFF;
-	reg[3:0] AlienH;
-	reg[3:0] AlienW;
+	reg[3:0] AlienX;
+	reg[3:0] AlienY;
 	reg[9:0] x_t;
 	reg[9:0] y_t;
 
@@ -57,7 +57,7 @@ module Bullet(
 		if (Reset) begin
 		  Aliens_Grid <= 50'h3FFFFFFFFFFFF;
 		  Bullet_Row <= 500;
-		  Bullet_Col <= 9'bXXXXXXXXX;
+		  Bullet_Col <= 350;
 		end
 		else begin
 			if (Bullet_Fired && ~Bullet_Onscreen) begin
@@ -70,12 +70,12 @@ module Bullet(
 			if (Bullet_Col >= Aliens_Col && Bullet_Row >= Aliens_Row) begin
 				x_t = Bullet_Col - Aliens_Col;
 				y_t = Bullet_Row - Aliens_Row;
+				AlienX = x_t / (AlienWidth + AlienWidthSpacing);
+				AlienY = y_t / (AlienHeight + AlienHeightSpacing);
 				x_t = x_t % (AlienWidth + AlienWidthSpacing);
-				AlienH = x_t / (AlienWidth + AlienWidthSpacing);
 				y_t = y_t % (AlienHeight + AlienHeightSpacing);
-				AlienW = y_t / (AlienHeight + AlienHeightSpacing);
-				if (x_t < AlienWidth && y_t < AlienHeight && Aliens_Grid[AlienW * NumCols + AlienH]) begin
-					Aliens_Grid[AlienW * NumCols + AlienH] <= 0;
+				if (x_t < AlienWidth && y_t < AlienHeight && Aliens_Grid[AlienY * NumCols + AlienX]&& Bullet_Col < Aliens_Col + 10 * (AlienWidth + AlienWidthSpacing) && Bullet_Row < Aliens_Row + 5 * (AlienHeight + AlienHeightSpacing)) begin
+					Aliens_Grid[AlienY * NumCols + AlienX] <= 0;
 					Bullet_Row <= 500;
 				end
 			end

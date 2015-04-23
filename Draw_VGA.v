@@ -49,6 +49,8 @@ module Draw_VGA(
 	parameter PlayerHeight = 20;
 	parameter AlienHeightSpacing = 10;
 	parameter NumCols = 10;
+	parameter BulletWidth = 10;
+	parameter BulletHeight = 20;
 	
 	//reg R, B;
 	//reg vga_r_t, vga_g_t, vga_b_t;
@@ -64,6 +66,7 @@ module Draw_VGA(
 	reg [9:0] CounterX_t;
 	reg [9:0] CounterY_t;
 	
+	//Drawing Player
 	assign G = (CounterX >= PlayerCol) && (CounterX < (PlayerCol + PlayerWidth)) && (CounterY >= PlayerRow) && (CounterY < (PlayerRow + PlayerHeight));
 	assign R = R_t;
 	//assign G = G_t;
@@ -84,12 +87,15 @@ module Draw_VGA(
 		end
 		else
 		begin
+		
+			//Drawing Aliens
 			isAlien = 0;
 			AlienX = 0;
 			AlienY = 0;
 			CounterX_t = CounterX;
 			CounterY_t = CounterY;
 			R_t = 0;
+			B_t = 0;
 			if (CounterX_t >= AliensCol && CounterY_t >= AliensRow)
 			begin
 				CounterX_t = CounterX_t - AliensCol;
@@ -101,6 +107,14 @@ module Draw_VGA(
 				if (CounterX_t < AlienWidth && CounterY_t < AlienHeight && Aliens_Grid[AlienY * NumCols + AlienX] && CounterX < AliensCol + 10 * (AlienWidth + AlienWidthSpacing) && CounterY < AliensRow + 5 * (AlienHeight + AlienHeightSpacing))
 					R_t = 1;
 			end
+			
+			//Drawing Bullet
+			if (BulletExists)
+			begin
+				if (CounterX >= BulletCol && CounterX < BulletCol + BulletWidth && CounterY >= BulletRow && CounterY < BulletRow + BulletHeight)
+					B_t = 1;
+			end
+			
 		end
 		
 		

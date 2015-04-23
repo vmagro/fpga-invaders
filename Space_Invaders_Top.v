@@ -37,7 +37,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 
 	assign	button_clk = DIV_CLK[18];
 	assign	clk = DIV_CLK[1];
-	assign	game_clk = DIV_CLK[20];
+	assign	game_clk = DIV_CLK[21];
 	assign 	{St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar} = {5'b11111};
 	
 	wire inDisplayArea;
@@ -289,13 +289,13 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			wire [9:0] AliensCol;
 			wire [8:0] PlayerRow;
 			wire [9:0] PlayerCol;
-			reg [8:0] BulletRow;
-			reg [9:0] BulletCol;
-			reg BulletExists;
+			wire [8:0] BulletRow;
+			wire [9:0] BulletCol;
+			//reg BulletExists;
 			
 			wire Reached_Bottom;
 			
-			reg Bullet_Fired;
+			wire Bullet_Fired;
 			wire Aliens_Defeated;
 			wire Bullet_Onscreen;
 			
@@ -339,7 +339,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Reset(reset),
 				 .BulletRow(BulletRow),
 				 .BulletCol(BulletCol),
-				 .BulletExists(BulletExists),
+				 .BulletExists(Bullet_Onscreen),
 				 .CounterX(CounterX),
 				 .CounterY(CounterY),
 				 .inDisplayArea(inDisplayArea),
@@ -387,15 +387,17 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Clk(game_clk),
 				 .Reset(reset),
 				 .Bullet_Fired(Bullet_Fired),
-				 .Aliens_Row(Aliens_Row),
-				 .Aliens_Col(Aliens_Col),
+				 .Aliens_Row(AliensRow),
+				 .Aliens_Col(AliensCol),
 				 .Player_Row(PlayerRow),
 				 .Player_Col(PlayerCol),
-				 .Bullet_Row(Bullet_Row),
-				 .Bullet_Col(Bullet_Col),
+				 .Bullet_Row(BulletRow),
+				 .Bullet_Col(BulletCol),
 				 .Aliens_Defeated(Aliens_Defeated),
 				 .Bullet_Onscreen(Bullet_Onscreen),
 				 .Aliens_Grid(Aliens_Grid)
 			);
+			
+			assign Bullet_Fired = jstkData[1];
 	
 endmodule
