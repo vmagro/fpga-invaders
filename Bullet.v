@@ -47,6 +47,8 @@ module Bullet(
 	parameter PlayerHeight = 20;
 	parameter AlienHeightSpacing = 10;
 	parameter NumCols = 10;
+	parameter BulletWidth = 10;
+	parameter BulletHeight = 20;
 
 	integer i, j;
 

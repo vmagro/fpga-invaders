@@ -33,8 +33,8 @@ module Aliens(
 	 assign AliensRow = AliensRow_t;
 	 assign AliensCol = AliensCol_t;
 	 
-	 parameter HorizontalMovement = 10;
-	 parameter VerticalMovement = 5;
+	 parameter HorizontalMovement = 5;
+	 parameter VerticalMovement = 10;
 	 
 	 always @(posedge Clk, posedge Reset)
 	 begin
