@@ -47,8 +47,8 @@ module Bullet(
 	parameter PlayerHeight = 20;
 	parameter AlienHeightSpacing = 10;
 	parameter NumCols = 10;
-	parameter BulletWidth = 10;
-	parameter BulletHeight = 20;
+	parameter BulletWidth = 4;
+	parameter BulletHeight = 8;
 
 	integer i, j;
 
@@ -64,14 +64,14 @@ module Bullet(
 		else begin
 			if (Bullet_Fired && ~Bullet_Onscreen) begin
 				Bullet_Row <= Player_Row;
-				Bullet_Col <= Player_Col;
+				Bullet_Col <= Player_Col + PlayerWidth / 2;
 			end
 			if (Bullet_Onscreen) begin
-				Bullet_Row <= Bullet_Row - 10;
+				Bullet_Row <= Bullet_Row - 20;
 			end
 			if (Bullet_Col >= Aliens_Col && Bullet_Row >= Aliens_Row) begin
-				x_t = Bullet_Col - Aliens_Col;
-				y_t = Bullet_Row - Aliens_Row;
+				x_t = Bullet_Col + (BulletWidth / 2) - Aliens_Col;
+				y_t = Bullet_Row + (BulletHeight / 2) - Aliens_Row;
 				AlienX = x_t / (AlienWidth + AlienWidthSpacing);
 				AlienY = y_t / (AlienHeight + AlienHeightSpacing);
 				x_t = x_t % (AlienWidth + AlienWidthSpacing);

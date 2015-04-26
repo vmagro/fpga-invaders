@@ -49,8 +49,8 @@ module Draw_VGA(
 	parameter PlayerHeight = 20;
 	parameter AlienHeightSpacing = 10;
 	parameter NumCols = 10;
-	parameter BulletWidth = 10;
-	parameter BulletHeight = 20;
+	parameter BulletWidth = 4;
+	parameter BulletHeight = 8;
 	
 	//reg R, B;
 	//reg vga_r_t, vga_g_t, vga_b_t;
