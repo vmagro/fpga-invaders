@@ -402,7 +402,8 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				.rst(reset),
 				.shot(Bullet_Shot),
 				.collision(Collision),
-				.pin(JB1)
+				.pin(JB1),
+				.Reached_Bottom(Reached_Bottom)
 			);
 	
 endmodule

@@ -23,6 +23,7 @@ module audio(
 	 input rst,
 	 input shot,
 	 input collision,
+	 input Reached_Bottom,
     output reg pin
     );
 	 
@@ -32,35 +33,36 @@ reg[32:0] colliding;
 reg[32:0] div_clk;
 
 always @(posedge clk) begin
-	if (~rst) begin
+	if (rst) begin
 		div_clk <= 0;
 		pin <= 0;
 		
 		shooting <= 0;
 		colliding <= 0;
 	end
-	
-	div_clk <= div_clk + 1;
-	
-	if (shot && shooting == 0) begin
-		shooting <= 12000000;
-		div_clk <= 0;
-	end
-	
-	if (collision && colliding == 0) begin
-		colliding <= 12000000;
-		shooting <= 0;
-		div_clk <= 0;
-	end
-	
-	if (shooting > 0) begin
-		pin <= div_clk[16];
-		shooting <= shooting - 1;
-	end
-	
-	if (colliding > 0) begin
-		pin <= div_clk[19];
-		colliding <= colliding - 1;
+	if (~Reached_Bottom) begin
+		div_clk <= div_clk + 1;
+		
+		if (shot && shooting == 0) begin
+			shooting <= 12000000;
+			div_clk <= 0;
+		end
+		
+		if (collision && colliding == 0) begin
+			colliding <= 12000000;
+			shooting <= 0;
+			div_clk <= 0;
+		end
+		
+		if (shooting > 0) begin
+			pin <= div_clk[16];
+			shooting <= shooting - 1;
+		end
+		
+		if (colliding > 0) begin
+			pin <= div_clk[19];
+			colliding <= colliding - 1;
+		end
 	end
 end
 
