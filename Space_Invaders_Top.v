@@ -7,7 +7,8 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar,
 	//An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
 	//LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
-	MISO, SW, SS, MOSI, SCLK, LED, AN, SEG);
+	MISO, SW, SS, MOSI, SCLK, LED, AN, SEG,
+	JB0);
 	
 	input ClkPort, Sw0, btnU, btnD, Sw0, Sw1;
 	output St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar;
@@ -15,6 +16,9 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	//output An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp;
 	//output LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
 	reg vga_r, vga_g, vga_b;
+	
+	//audio
+	input JB0;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	
