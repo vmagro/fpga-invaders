@@ -27,11 +27,11 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	BUF BUF3 (start, Sw1);
 	
 	reg [27:0]	DIV_CLK;
-	always @ (posedge board_clk, posedge reset)  
+	always @ (posedge board_clk/*, posedge reset*/)  
 	begin : CLOCK_DIVIDER
-      if (reset)
+/*     if (reset)
 			DIV_CLK <= 0;
-      else
+      else*/
 			DIV_CLK <= DIV_CLK + 1'b1;
 	end	
 
@@ -345,7 +345,9 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .inDisplayArea(inDisplayArea),
 				 .R(R),
 				 .G(G),
-				 .B(B)
+				 .B(B),
+				 .Reached_Bottom(Reached_Bottom),
+				 .Aliens_Defeated(Aliens_Defeated)
 			);
 			
 			always @(posedge clk)
@@ -364,7 +366,9 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Reset(reset),
 				 .AliensRow(AliensRow),
 				 .AliensCol(AliensCol),
-				 .Reached_Bottom(Reached_Bottom)
+				 .Reached_Bottom(Reached_Bottom),
+				 .Aliens_Grid(Aliens_Grid),
+				 .Aliens_Defeated(Aliens_Defeated)
 			);
 			
 			//-----------------------------------------------
