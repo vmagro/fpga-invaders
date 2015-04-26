@@ -34,7 +34,7 @@ module Bullet(
 	output reg [49:0] Aliens_Grid
 );
 
-	//assign Aliens_Grid = 50'h3FFFFFFFFFFFF;
+
 	reg[3:0] AlienX;
 	reg[3:0] AlienY;
 	reg[9:0] x_t;
@@ -49,8 +49,6 @@ module Bullet(
 	parameter NumCols = 10;
 	parameter BulletWidth = 4;
 	parameter BulletHeight = 8;
-
-	integer i, j;
 
 	assign Bullet_Onscreen = ((Bullet_Row > 0) && (Bullet_Row < 480));
 	assign Aliens_Defeated = (Aliens_Grid == 0);

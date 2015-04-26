@@ -407,5 +407,17 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			);
 			
 			assign Bullet_Fired = jstkData[1];
+			
+			//-----------------------------------------------
+			//  	  			Sound Interface
+			//-----------------------------------------------
+			
+			audio audio_1(
+				.clk(board_clk),
+				.rst(reset),
+				.shot(),
+				.collision(),
+				.pin()
+			);
 	
 endmodule
