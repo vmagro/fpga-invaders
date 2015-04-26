@@ -33,6 +33,7 @@ module Draw_VGA(
 	 input [9:0] CounterX,
 	 input [9:0] CounterY,
 	 input inDisplayArea,
+	 input Reached_Bottom,
 	 output R,
 	 output G,
 	 output B
@@ -67,7 +68,8 @@ module Draw_VGA(
 	reg [9:0] CounterY_t;
 	
 	//Drawing Player
-	assign G = (CounterX >= PlayerCol) && (CounterX < (PlayerCol + PlayerWidth)) && (CounterY >= PlayerRow) && (CounterY < (PlayerRow + PlayerHeight));
+	assign G = ~Reached_Bottom && (CounterX >= PlayerCol) && (CounterX < (PlayerCol + PlayerWidth)) && (CounterY >= PlayerRow) 
+					&& (CounterY < (PlayerRow + PlayerHeight));
 	assign R = R_t;
 	//assign G = G_t;
 	assign B = B_t;
@@ -85,7 +87,7 @@ module Draw_VGA(
 			CounterX_t = 10'bxxxxxxxxxx;
 			CounterY_t = 10'bxxxxxxxxxx;
 		end
-		else
+		else if (~Reached_Bottom)
 		begin
 		
 			//Drawing Aliens
@@ -114,32 +116,11 @@ module Draw_VGA(
 				if (CounterX >= BulletCol && CounterX < BulletCol + BulletWidth && CounterY >= BulletRow && CounterY < BulletRow + BulletHeight)
 					B_t = 1;
 			end
-			
 		end
-		
-		
-		
-		
-		
-		/*for (i=0; i < 5; i = i+1)
+		else
 		begin
-			for (j=0; j < 10; j = j+1)
-			begin
-				if (i == 0 && j == 0)
-					R_t = 0;
-				if (R_t == 0)
-				begin
-					if ( (CounterX >= AliensCol + (j * (AlienWidth + AlienWidthSpacing)) ) && (CounterX < AliensCol + (j * (AlienWidth + AlienWidthSpacing) + AlienWidth)) )
-					begin
-						if ( (CounterY >= AliensRow + (i * (AlienHeight + AlienHeightSpacing)) ) && (CounterY < AliensRow + (i * (AlienHeight + AlienHeightSpacing) + AlienHeight)) )
-						begin
-							if (Aliens_Grid[i * NumCols + j])
-								R_t = 1;
-						end
-					end
-				end
-			end
-		end*/
+			R_t = 1;
+		end
 	end
 	
 /*	always @(posedge Clk)
