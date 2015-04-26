@@ -346,7 +346,8 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .R(R),
 				 .G(G),
 				 .B(B),
-				 .Reached_Bottom(Reached_Bottom)
+				 .Reached_Bottom(Reached_Bottom),
+				 .Aliens_Defeated(Aliens_Defeated)
 			);
 			
 			always @(posedge clk)
@@ -366,7 +367,8 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .AliensRow(AliensRow),
 				 .AliensCol(AliensCol),
 				 .Reached_Bottom(Reached_Bottom),
-				 .Aliens_Grid(Aliens_Grid)
+				 .Aliens_Grid(Aliens_Grid),
+				 .Aliens_Defeated(Aliens_Defeated)
 			);
 			
 			//-----------------------------------------------

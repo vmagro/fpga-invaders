@@ -22,6 +22,7 @@ module Aliens(
     input Clk,
     input Reset,
 	 input [49:0] Aliens_Grid,
+	 input Aliens_Defeated,
     output [8:0] AliensRow,
 	 output [9:0] AliensCol,
     output Reached_Bottom
@@ -31,13 +32,12 @@ module Aliens(
 	 reg [9:0] AliensCol_t;
 	 reg MovingRight;
 	 reg Reached_Bottom_t;
+	 reg [3:0] HorizontalMovement;
 	 
 	 assign AliensRow = AliensRow_t;
 	 assign AliensCol = AliensCol_t;
 	 assign Reached_Bottom = Reached_Bottom_t;
-	 //assign Reached_Bottom = AliensRow_t + Total_Alien_Height > Player_Row;
 	 
-	 parameter HorizontalMovement = 5;
 	 parameter VerticalMovement = 10;
 	 parameter AlienHeight = 20;
 	 parameter AlienHeightSpacing = 10;	 
@@ -51,6 +51,7 @@ module Aliens(
 			AliensCol_t <= 10;
 			MovingRight <= 1;
 			Reached_Bottom_t <= 0;
+			HorizontalMovement <= 2;
 		end
 		else if (~Reached_Bottom)
 		begin
@@ -84,6 +85,13 @@ module Aliens(
 				Reached_Bottom_t <= 1;
 			else if ((AliensRow_t + AlienHeight > Player_Row) && Aliens_Grid[9:0])
 				Reached_Bottom_t <= 1;
+			if (Aliens_Defeated)
+			begin
+				HorizontalMovement <= HorizontalMovement + 2;
+				AliensRow_t <= 0;
+				AliensCol_t <= 10;
+				MovingRight <= 1;
+			end
 		end
 	 end
 	 

@@ -56,7 +56,7 @@ module Bullet(
 	assign Aliens_Defeated = (Aliens_Grid == 0);
 
 	always @(posedge Clk) begin
-		if (Reset) begin
+		if (Reset || Aliens_Defeated) begin
 		  Aliens_Grid <= 50'h3FFFFFFFFFFFF;
 		  Bullet_Row <= 500;
 		  Bullet_Col <= 350;

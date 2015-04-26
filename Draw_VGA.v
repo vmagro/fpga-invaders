@@ -34,6 +34,7 @@ module Draw_VGA(
 	 input [9:0] CounterY,
 	 input inDisplayArea,
 	 input Reached_Bottom,
+	 input Aliens_Defeated,
 	 output R,
 	 output G,
 	 output B
