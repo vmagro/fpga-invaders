@@ -8,7 +8,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	//An0, An1, An2, An3, Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
 	//LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
 	MISO, SW, SS, MOSI, SCLK, LED, AN, SEG,
-	JB0);
+	JB1);
 	
 	input ClkPort, Sw0, btnU, btnD, Sw0, Sw1;
 	output St_ce_bar, St_rp_bar, Mt_ce_bar, Mt_St_oe_bar, Mt_St_we_bar;
@@ -18,7 +18,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 	reg vga_r, vga_g, vga_b;
 	
 	//audio
-	input JB0;
+	output JB1;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -302,6 +302,10 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			wire Bullet_Fired;
 			wire Aliens_Defeated;
 			wire Bullet_Onscreen;
+			wire Bullet_Shot;
+			wire Collision;
+			
+			wire R, G, B;
 			
 
 	// ===========================================================================
@@ -311,28 +315,7 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			//-----------------------------------------------
 			//  	  			Draw_VGA Interface
 			//-----------------------------------------------
-/*			Draw_VGA Draw_VGA_1(
-				 .Aliens_Grid(Aliens_Grid),
-				 .AliensRow(AliensRow),
-				 .AliensCol(AliensCol),
-				 .PlayerRow(PlayerRow),
-				 .PlayerCol(PlayerCol),
-				 .Clk(clk),
-				 .Reset(reset),
-				 .BulletRow(BulletRow),
-				 .BulletCol(BulletCol),
-				 .BulletExists(BulletExists),
-				 .CounterX(CounterX),
-				 .CounterY(CounterY),
-				 .inDisplayArea(inDisplayArea),
-				 .vga_r(vga_r),
-				 .vga_g(vga_g),
-				 .vga_b(vga_b)
-			);
-			*/
-			
-			wire R, G, B;
-			
+
 			Draw_VGA Draw_VGA_1(
 				 .Aliens_Grid(Aliens_Grid),
 				 .AliensRow(AliensRow),
@@ -403,7 +386,9 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 				 .Bullet_Col(BulletCol),
 				 .Aliens_Defeated(Aliens_Defeated),
 				 .Bullet_Onscreen(Bullet_Onscreen),
-				 .Aliens_Grid(Aliens_Grid)
+				 .Aliens_Grid(Aliens_Grid),
+				 .Bullet_Shot(Bullet_Shot),
+				 .Collision(Collision)
 			);
 			
 			assign Bullet_Fired = jstkData[1];
@@ -415,9 +400,9 @@ module Space_Invaders_Top(ClkPort, vga_h_sync, vga_v_sync, vga_r, vga_g, vga_b, 
 			audio audio_1(
 				.clk(board_clk),
 				.rst(reset),
-				.shot(),
-				.collision(),
-				.pin()
+				.shot(Bullet_Shot),
+				.collision(Collision),
+				.pin(JB1)
 			);
 	
 endmodule

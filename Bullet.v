@@ -31,7 +31,9 @@ module Bullet(
 	output reg [9:0] Bullet_Col,
 	output Aliens_Defeated,
 	output Bullet_Onscreen,
-	output reg [49:0] Aliens_Grid
+	output reg [49:0] Aliens_Grid,
+	output reg Bullet_Shot,
+	output reg Collision
 );
 
 
@@ -58,11 +60,16 @@ module Bullet(
 		  Aliens_Grid <= 50'h3FFFFFFFFFFFF;
 		  Bullet_Row <= 500;
 		  Bullet_Col <= 350;
+		  Bullet_Shot <= 0;
+		  Collision <= 0;
 		end
 		else begin
+			Bullet_Shot <= 0;
+			Collision <= 0;
 			if (Bullet_Fired && ~Bullet_Onscreen) begin
 				Bullet_Row <= Player_Row;
 				Bullet_Col <= Player_Col + PlayerWidth / 2;
+				Bullet_Shot <= 1;
 			end
 			if (Bullet_Onscreen) begin
 				Bullet_Row <= Bullet_Row - 20;
@@ -77,6 +84,7 @@ module Bullet(
 				if (x_t < AlienWidth && y_t < AlienHeight && Aliens_Grid[AlienY * NumCols + AlienX]&& Bullet_Col < Aliens_Col + 10 * (AlienWidth + AlienWidthSpacing) && Bullet_Row < Aliens_Row + 5 * (AlienHeight + AlienHeightSpacing)) begin
 					Aliens_Grid[AlienY * NumCols + AlienX] <= 0;
 					Bullet_Row <= 500;
+					Collision <= 1;
 				end
 			end
 		end

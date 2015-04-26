@@ -140,5 +140,5 @@ Net "MISO" LOC = N10 | IOSTANDARD = LVCMOS33; #Bank = 2, pin name = IO_L20P, Sch
 Net "SCLK" LOC = P11 | IOSTANDARD = LVCMOS33; #Bank = 2, pin name = IO_L20N, Sch name = JA4
 
 #Audio
-Net "JB0" LOC = K2 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L38P_M3DQ2, Sch name = JB1
+Net "JB1" LOC = K2 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L38P_M3DQ2, Sch name = JB1
 
